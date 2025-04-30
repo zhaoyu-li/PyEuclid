@@ -6,7 +6,7 @@ Available badge, functional badge, and reusable badge
 ## Computational Recourses
 We conduct our experiments on a server running Ubuntu 22.04.5 LTS with an AMD Ryzen Threadripper 2990WX processor, utilizing 30 CPU cores in parallel (2 cores per process, each allocated 4 GB of memory). On this setup, experiments on the JGEX-AG-231 dataset take approximately 2 hours to complete, while the Geometry3K dataset takes around 1 hour.
 
-Additionally, we run sequential experiments on an Apple MacBook Pro with an M3 chip, using 2 CPU cores and 4 GB of memory. On this setup, processing the Geometry3K dataset takes approximately 5 hours.
+Additionally, we run sequential experiments on an Apple MacBook Pro with an M3 chip, using 2 CPU cores and 4 GB of memory. On this setup, processing the Geometry3K dataset takes approximately 7~8 hours.
 
 ## Folder Structure
 ```
@@ -23,30 +23,36 @@ Additionally, we run sequential experiments on an Apple MacBook Pro with an M3 c
 ```
 
 ## Installation
-You can get started with PyEuclid using Docker or a local installation.
+You can get started with PyEuclid using Docker *or* a local installation.
 
-You can either build the Docker image locally or run it directly from Docker Hub:
+You can either build the Docker image locally or pull it from Docker Hub:
 ```bash
 # Build the Docker image locally
 docker build -t pyeuclid .
 # Alternatively, pull the image from Docker Hub
-docker run pyeuclid
+docker pull dahubao/pyeuclid
+# After obtaining the image, run
+docker run -it pyeuclid bash
 ```
 
-To install PyEuclid locally without Docker, run:
+To install PyEuclid locally *without* Docker, run:
 ```bash
 conda create -n pyeuclid python=3.11 -y
 conda activate pyeuclid
+cd PyEuclid
 pip install .
 tar -xvzf cache.tar.gz
 ```
 
 After installation, verify that everything is working by running:
 ```bash
+python test_single.py --help
 python test_single.py --show-proof
 ```
 
 If you see output like `Solved in 8.90s`, the setup is successful.
+
+
 
 Note:
 PyEuclid uses Gurobi as a component of its proof generator.
