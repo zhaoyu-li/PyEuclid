@@ -70,7 +70,6 @@ class Engine:
             self.state.relations = relations_bak
             self.state.equations = equations_bak
             self.state.add_conditions(new_relations + new_equations)
-            self.state.solutions = self.state.solutions[:-1]
             self.algebraic_system.solve_equation()
         
         except Exception as e:

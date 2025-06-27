@@ -22,8 +22,8 @@ class ProofGenerator:
     
     def run(self, node=None, depth=None, root=True):
         if not node and self.state.goal:
-            node = self.state.goal
-            
+            node = self.state.goal - self.state.complete()
+
         if isinstance(node, ConstructionRule):
             return
         
@@ -72,7 +72,7 @@ class ProofGenerator:
                 assert False, f"{node} is not proved"
         else:
             if isinstance(node, Traced):
-                if type(node.sources[0]) in (DiagramAngle4a, DiagramAngle4b, DiagramAngle2, FlatAngle, FlatAngle2):
+                if not node.sources or type(node.sources[0]) in (DiagramAngle4a, DiagramAngle4b, DiagramAngle2, FlatAngle, FlatAngle2):
                     sources = []
                 else:
                     sources = node.sources
@@ -201,7 +201,7 @@ class ProofGenerator:
     def get_proof(self, node=None):
         res = []
         if not node and self.state.goal:
-            node = self.state.goal
+            node = self.state.goal - self.state.complete()
         
         proof_steps = self.format_proof(node)
         

@@ -29,7 +29,7 @@ class State:
         self.condition2depth = defaultdict(int)
         
         self.current_depth = 0
-        self.solutions = []
+        self.solutions = {}
         self.solvers = {}
         self.try_complex = False
         self.silent = False
@@ -241,10 +241,8 @@ class State:
                 return solution
             return None
     
-    def simplify_equation(self, expr, depth=None):
-        if depth is None:
-            depth = len(self.solutions) - 1
-        solved_vars = self.solutions[depth]
+    def simplify_equation(self, expr):
+        solved_vars = self.solutions
         expr = getattr(expr, "expr", expr)
         for symbol in expr.free_symbols:
             if symbol in solved_vars:

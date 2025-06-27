@@ -220,6 +220,8 @@ def classify_equations(equations: List[Traced], var_types):
             # eqratio, length eq const, eqlength, linear equations involving length and variables
             if "Length" in eq_types:
                 length_ratio.append(eq)
+                if length_linear_pattern.match(tmp):
+                    length_linear.append(eq)
             elif "Angle" in eq_types: # such as Variable_angle_2 - piVariable_x/90
                 angle_linear.append(eq)
             else:
